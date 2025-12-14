@@ -90,11 +90,14 @@ export default function InformationSection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-172 lg:w-200 xl:w-240 ">
-      <h1 className="text-blue-700 mb-4 top-10 absolute">ارتباط با ما</h1>
-      <h3 className="text-gray-700 mb-8 top-28 absolute">azolfagharir ساخته شده توسط </h3>
+    <div className="flex flex-col items-center justify-start w-full py-8">
+      {/* Title */}
+      <h1 className="text-blue-700 mb-4">ارتباط با ما</h1>
+      <h3 className="text-gray-700 mb-8">azolfagharir ساخته شده توسط</h3>
+
+      {/* Form Section */}
       <div className="w-full">
-        <form className="flex flex-col col-2 shadow-xl/30" onSubmit={onSubmitHandler}>
+        <form className="flex flex-col shadow-xl/30" onSubmit={onSubmitHandler}>
           <div className="grid grid-cols-2 gap-4 m-4 mr-8 ml-8">
             <input
               type="text"
@@ -137,6 +140,8 @@ export default function InformationSection() {
           </button>
         </form>
       </div>
+
+      {/* Display Errors */}
       <div>
         {errors.FirstName && <span className="text-red-500">{errors.FirstName}</span>}
         <br />
@@ -147,24 +152,24 @@ export default function InformationSection() {
         {errors.Phone && <span className="text-red-500">{errors.Phone}</span>}
       </div>
 
-      <div>
-        {
-          formData.length == 0 ?
-          <div className="absolute w-242 h-40 left-70 bg-gray-300 rounded-4xl">
-            <p className=" m-8 mt-20">empty</p>
-            </div> : 
-            formData.map((data, index) => (
-          <ContactUs
-            key={index}
-            name={data.FirstName}
-            lastName={data.LastName}
-            email={data.Email}
-            phone={data.Phone}
-            onDelete={() => deleteContact(index)} // Pass delete function to each ContactUs
-          />
-        ))
-        }
-      
+      {/* ContactUs List */}
+      <div className="w-full mt-8">
+        {formData.length === 0 ? (
+          <div className="flex justify-center items-center bg-gray-300 rounded-xl p-8">
+            <p>empty</p>
+          </div>
+        ) : (
+          formData.map((data, index) => (
+            <ContactUs
+              key={index}
+              name={data.FirstName}
+              lastName={data.LastName}
+              email={data.Email}
+              phone={data.Phone}
+              onDelete={() => deleteContact(index)} // Pass delete function to each ContactUs
+            />
+          ))
+        )}
       </div>
     </div>
   );
