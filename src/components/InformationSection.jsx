@@ -148,7 +148,12 @@ export default function InformationSection() {
       </div>
 
       <div>
-        {formData.map((data, index) => (
+        {
+          formData.length == 0 ?
+          <div className="absolute w-242 h-40 left-70 bg-gray-300 rounded-4xl">
+            <p className=" m-8 mt-20">empty</p>
+            </div> : 
+            formData.map((data, index) => (
           <ContactUs
             key={index}
             name={data.FirstName}
@@ -157,7 +162,9 @@ export default function InformationSection() {
             phone={data.Phone}
             onDelete={() => deleteContact(index)} // Pass delete function to each ContactUs
           />
-        ))}
+        ))
+        }
+      
       </div>
     </div>
   );
